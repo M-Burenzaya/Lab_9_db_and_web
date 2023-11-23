@@ -1,56 +1,62 @@
 function addStudent() {
     const formData = new FormData(document.getElementById("studentForm"));
 
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
-                window.alert("Data sent successfully: " + this.responseText);
-            } else {
-                window.alert("Error: " + this.statusText);
+    fetch("student.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
             }
-        }
-    };
-
-    xhttp.open("POST", "student.php", true);
-    xhttp.send(formData);
+            throw new Error("Network response was not ok.");
+        })
+        .then((data) => {
+            window.alert("Data sent successfully: " + data);
+        })
+        .catch((error) => {
+            window.alert("Error: " + error.message);
+        });
 }
 
 function addLibraryVisit() {
     const formData = new FormData(document.getElementById("visitForm"));
 
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
-                window.alert("Data sent successfully: " + this.responseText);
-            } else {
-                window.alert("Error: " + this.statusText);
+    fetch("library.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
             }
-        }
-    };
-
-    xhttp.open("POST", "library.php", true);
-    xhttp.send(formData);
+            throw new Error("Network response was not ok.");
+        })
+        .then((data) => {
+            window.alert("Data sent successfully: " + data);
+        })
+        .catch((error) => {
+            window.alert("Error: " + error.message);
+        });
 }
 
 function showStudentHours() {
     const formData = new FormData(document.getElementById("hoursForm"));
 
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
-                document.querySelector(".result").innerHTML = this.responseText;
-            } else {
-                window.alert("Error: " + this.statusText);
+    fetch("join_student_visit.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
             }
-        }
-    };
-
-    xhttp.open("POST", "join_student_visit.php", true);
-    xhttp.send(formData);
+            throw new Error("Network response was not ok.");
+        })
+        .then((data) => {
+            document.querySelector(".result").innerHTML = data;
+        })
+        .catch((error) => {
+            window.alert("Error: " + error.message);
+        });
 }
