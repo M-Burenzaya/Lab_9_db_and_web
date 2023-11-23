@@ -7,7 +7,7 @@ $host = 'localhost';
 $conn = new mysqli($host, $user, $pass, $dbName);
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Холболт амжилтгүй: " . $conn->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -25,20 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->execute();
 
         $result = $stmt->get_result();
-        
-        // if ($result->num_rows > 0) {
-        //     $data = array();
-
-        //     while ($row = $result->fetch_assoc()) {
-        //         $data[] = $row; // Append each row to the data array
-        //     }
-
-        //     // Output the data as JSON
-        //     header('Content-Type: application/json');
-        //     echo json_encode($data);
-        // } else {
-        //     echo "No data found for the specified date.";
-        // }
 
         if ($result->num_rows > 0) {
 
@@ -63,15 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             echo "</table>";
         } else {
-            echo "No data found for the specified date.";
+            echo "Гаргах мэдээлэл олдсонгүй.";
         }
 
         $stmt->close();
     } else {
-        echo "Specific date is required.";
+        echo "Бүх талбарыг бөглөнө үү.";
     }
 } else {
-    echo "Only use POST requests.";
+    echo "Зөвхөн POST хүсэлт ашиглана уу.";
 }
 
 $conn->close();
