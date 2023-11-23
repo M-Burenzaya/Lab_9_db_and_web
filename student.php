@@ -26,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($stmt->affected_rows > 0) {
             echo "Өгөгдөл амжилттай нэмэгдлээ." . "<br>";
-            echo "Student ID: " . $stud_id . "<br>";
-            echo "Last Name: " . $lname . "<br>";
-            echo "First Name: " . $fname . "<br>";
+            echo "Оюутны ID: " . $stud_id . "<br>";
+            echo "Оюутны овог: " . $lname . "<br>";
+            echo "Оюутны нэр: " . $fname . "<br>";
         } else {
             echo "Нэмэх үйлдэл амжилтгүй: " . $conn->error;
         }
