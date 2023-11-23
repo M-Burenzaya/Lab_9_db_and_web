@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $lname = $_POST["lname"] ?? null;
     $fname = $_POST["fname"] ?? null;
 
-    if ($stud_id !== null && $lname !== null && $fname !== null) {
+    if ($stud_id !== '' && $lname !== '' && $fname !== '') {
     
         $stmt = $conn->prepare("INSERT INTO Students (StudentID, lname, fname) VALUES (?, ?, ?)");
         $stmt->bind_param("iss", $stud_id, $lname, $fname);

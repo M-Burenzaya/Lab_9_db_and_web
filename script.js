@@ -6,7 +6,7 @@ function addStudent() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
             if (this.status == 200) {
-                //window.alert("Өгөгдөл амжилттай илгээгдлээ: " + this.responseText);
+                // window.alert("Өгөгдөл амжилттай илгээгдлээ: " + this.responseText);
                 document.querySelector('#result').innerHTML = this.responseText;
             } else {
                 window.alert("Алдаа: " + this.statusText);
@@ -26,7 +26,7 @@ function addLibraryVisit() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
             if (this.status == 200) {
-                //window.alert("Өгөгдөл амжилттай илгээгдлээ: " + this.responseText);
+                // window.alert("Өгөгдөл амжилттай илгээгдлээ: " + this.responseText);
                 document.querySelector('#result').innerHTML = this.responseText;
             } else {
                 window.alert("Алдаа: " + this.statusText);
@@ -39,6 +39,7 @@ function addLibraryVisit() {
 }
 
 function showStudentHours() {
+    
     const formData = new FormData(document.getElementById("hoursForm"));
 
     var xhttp = new XMLHttpRequest();
@@ -46,7 +47,8 @@ function showStudentHours() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
             if (this.status == 200) {
-                document.querySelector(".result").innerHTML = this.responseText;
+                //window.alert("Өгөгдөл амжилттай илгээгдлээ: " + this.responseText);
+                document.querySelector("#result").innerHTML = this.responseText;
             } else {
                 window.alert("Error: " + this.statusText);
             }

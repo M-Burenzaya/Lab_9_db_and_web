@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $time_spent = $_POST["time_spent"] ?? null;
     $student_id_visit = $_POST["student_id_visit"] ?? null;
 
-    if ($visit_date !== null && $time_spent !== null && $student_id_visit !== null) {
+    if ($visit_date !== '' && $time_spent !== '' && $student_id_visit !== '') {
+    
         $stmt = $conn->prepare("INSERT INTO Visits (VisitDate, SpentTime, StudentID) VALUES (?, ?, ?)");
         $stmt->bind_param("ssi", $visit_date, $time_spent, $student_id_visit);
 
