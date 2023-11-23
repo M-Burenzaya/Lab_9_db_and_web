@@ -6,10 +6,10 @@ function addStudent() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
             if (this.status == 200) {
-                window.alert("Data sent successfully: " + this.responseText);
+                window.alert("Өгөгдөл амжилттай илгээгдлээ: " + this.responseText);
                 document.querySelector('#result').innerHTML = this.responseText;
             } else {
-                window.alert("Error: " + this.statusText);
+                window.alert("Алдаа: " + this.statusText);
             }
         }
     };
