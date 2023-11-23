@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Library Visits</title>
+</head>
+<body>
+    <form id="studentForm">
+        <h2>Student Details</h2>
+        <label for="student_id">Student ID:</label>
+        <input type="text" id="student_id" name="student_id">
+        <label for="student_name">Student Name:</label>
+        <input type="text" id="student_name" name="student_name">
+        <button type="button" onclick="addStudent()">Add Student</button>
+    </form>
+    
+    <form id="visitForm">
+        <h2>Library Visit Details</h2>
+        <label for="visit_date">Visit Date:</label>
+        <input type="date" id="visit_date" name="visit_date">
+        <label for="time_spent">Time Spent (hours):</label>
+        <input type="text" id="time_spent" name="time_spent">
+        <label for="student_id_visit">Student ID:</label>
+        <input type="text" id="student_id_visit" name="student_id_visit">
+        <button type="button" onclick="addLibraryVisit()">Add Visit</button>
+    </form>
+    
+    <h2>Student Hours on Specific Date</h2>
+    <form id="hoursForm">
+        <label for="specific_date">Enter Date:</label>
+        <input type="date" id="specific_date" name="specific_date">
+        <button type="button" onclick="showStudentHours()">Show Hours</button>
+    </form>
+    
+    <div id="result"></div>
+
+    <script>
+        function addStudent() {
+            const studentId = document.getElementById('student_id').value;
+            const studentName = document.getElementById('student_name').value;
+
+            fetch('process_form.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `student_id=${studentId}&student_name=${studentName}`
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Student added successfully');
+                } else {
+                    console.error('Error adding student');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        function addLibraryVisit() {
+        const visitDate = document.getElementById('visit_date').value;
+        const timeSpent = document.getElementById('time_spent').value;
+        const studentIdVisit = document.getElementById('student_id_visit').value;
+
+        fetch('process_form.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `visit_date=${visitDate}&time_spent=${timeSpent}&student_id_visit=${studentIdVisit}`
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Library visit added successfully');
+            } else {
+                console.error('Error adding library visit');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function showStudentHours() {
+        const specificDate = document.getElementById('specific_date').value;
+
+        fetch('show_hours.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `specific_date=${specificDate}`
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error('Error fetching student hours');
+            }
+        })
+        .then(data => {
+            document.getElementById('result').innerHTML = data;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    </script>
+</body>
+</html>
